@@ -5,15 +5,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
-import 'sign_in_viewmodel.dart';
+import 'sign_up_viewmodel.dart';
 
-class SignInView extends StatelessWidget {
-  const SignInView({Key? key}) : super(key: key);
+class SignUpView extends StatelessWidget {
+  const SignUpView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<SignInViewModel>.reactive(
-      viewModelBuilder: () => SignInViewModel(),
+    return ViewModelBuilder<SignUpViewModel>.reactive(
+      viewModelBuilder: () => SignUpViewModel(),
       builder: (context, viewModel, child) => Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -23,7 +23,7 @@ class SignInView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.07,
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class SignInView extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 Text(
-                  'Sign in to your account',
+                  'Create new account',
                   style: GoogleFonts.poppins(
                     fontSize: 21,
                     color: const Color(0xFFA52A2A),
@@ -125,21 +125,37 @@ class SignInView extends StatelessWidget {
                     suffixIcon: const Icon(Icons.visibility_off),
                   ),
                 ),
-                const SizedBox(height: 0),
+                const SizedBox(height: 20),
                 Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forgot password?',
-                      style: GoogleFonts.poppins(
-                        color: Colors.grey,
-                        fontSize: 14,
-                      ),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Confirm Password',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8),
+                TextField(
+                  obscureText: true,
+                  cursorColor: Colors.black,
+                  decoration: InputDecoration(
+                    hintText: 'Confirm your password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        color: Colors.black,
+                      ),
+                    ),
+                    suffixIcon: const Icon(Icons.visibility_off),
+                  ),
+                ),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -152,7 +168,7 @@ class SignInView extends StatelessWidget {
                       backgroundColor: const Color(0xFFA52A2A),
                     ),
                     child: Text(
-                      'Sign in',
+                      'Sign Up',
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         color: Colors.white,
@@ -163,7 +179,7 @@ class SignInView extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'other way to sign in',
+                  'other way to sign up',
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     color: Colors.grey,
@@ -226,14 +242,14 @@ class SignInView extends StatelessWidget {
                   children: [
                     Text.rich(
                       TextSpan(
-                        text: "Don't have an account?",
+                        text: "Already have an account?",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           color: Colors.black,
                         ),
                         children: [
                           TextSpan(
-                            text: ' Create Account',
+                            text: ' Sign in',
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               color: const Color(0xFFA52A2A),
@@ -241,7 +257,7 @@ class SignInView extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 viewModel.navigationservice
-                                    .navigateTo(Routes.sign_up);
+                                    .navigateTo(Routes.sign_in);
                               },
                           ),
                         ],
