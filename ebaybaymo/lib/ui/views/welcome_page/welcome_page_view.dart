@@ -27,13 +27,14 @@ class WelcomePageView extends StackedView<WelcomePageViewModel> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Colors.red,
-                  width: 1.0,
+                  color: Color(0xFFA52A2A),
+                  width: 1.5,
                 ),
               ),
               child: const CircleAvatar(
                 radius: 130,
-                // backgroundImage: AssetImage('lib/resources/images/google.png'),
+                backgroundImage:
+                    AssetImage('lib/resources/images/logo_ebaybaymo.png'),
                 backgroundColor: Color.fromARGB(255, 255, 255, 255),
               ),
             ),
@@ -68,7 +69,7 @@ class WelcomePageView extends StackedView<WelcomePageViewModel> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      // viewModel.navigationservice.navigateTo(Routes.sign_in);
+                      viewModel.navigationservice.navigateTo(Routes.sign_in);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFA52A2A),
