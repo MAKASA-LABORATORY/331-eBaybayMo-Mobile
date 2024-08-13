@@ -23,7 +23,7 @@ class SignUpView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.01,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -155,7 +155,7 @@ class SignUpView extends StatelessWidget {
                     suffixIcon: const Icon(Icons.visibility_off),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
