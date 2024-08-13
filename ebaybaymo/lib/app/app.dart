@@ -5,6 +5,7 @@ import 'package:ebaybaymo/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:ebaybaymo/ui/views/welcome_page/welcome_page_view.dart';
+import 'package:ebaybaymo/ui/views/sign_in/sign_in_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -12,6 +13,7 @@ import 'package:ebaybaymo/ui/views/welcome_page/welcome_page_view.dart';
     MaterialRoute(page: HomeView),
     MaterialRoute(page: StartupView),
     MaterialRoute(page: WelcomePageView, name: 'welcome_page', initial: true),
+    MaterialRoute(page: SignInView, name: 'sign_in'),
 // @stacked-route
   ],
   dependencies: [
