@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ebaybaymo/app/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,8 +18,50 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
   ) {
     return WillPopScope(
       onWillPop: () async {
-        // Return false to prevent back navigation
-        return false;
+        bool shouldCloseApp = await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Quit eBaybaymo app',
+                  style: GoogleFonts.poppins(
+                    fontSize: 20.0,
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+                Text(
+                  'Are you sure you want to quit ?',
+                  style: GoogleFonts.poppins(
+                    fontSize: 13.0,
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: Text(
+                  'No',
+                  style: GoogleFonts.poppins(color: Colors.black),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  exit(0);
+                },
+                child: Text(
+                  'Yes',
+                  style: GoogleFonts.poppins(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        );
+        return shouldCloseApp;
       },
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,

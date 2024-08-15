@@ -1,10 +1,10 @@
+// lib/ui/views/sign_up/sign_up_view.dart
 import 'package:ebaybaymo/app/app.router.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
-
 import 'sign_up_viewmodel.dart';
 
 class SignUpView extends StatelessWidget {
@@ -29,7 +29,7 @@ class SignUpView extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Color(0xFFA52A2A),
+                      color: const Color(0xFFA52A2A),
                       width: 1.5,
                     ),
                   ),
@@ -82,8 +82,16 @@ class SignUpView extends StatelessWidget {
                 const SizedBox(height: 8),
                 TextField(
                   cursorColor: Colors.black,
+                  onChanged: (value) {
+                    viewModel.email = value;
+                    if (viewModel.showValidationErrors)
+                      viewModel.notifyListeners();
+                  },
                   decoration: InputDecoration(
                     hintText: 'Enter your email address',
+                    errorText: viewModel.showValidationErrors
+                        ? viewModel.validateEmail(viewModel.email)
+                        : null,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -111,8 +119,16 @@ class SignUpView extends StatelessWidget {
                 TextField(
                   obscureText: true,
                   cursorColor: Colors.black,
+                  onChanged: (value) {
+                    viewModel.password = value;
+                    if (viewModel.showValidationErrors)
+                      viewModel.notifyListeners();
+                  },
                   decoration: InputDecoration(
                     hintText: 'Enter your password',
+                    errorText: viewModel.showValidationErrors
+                        ? viewModel.validatePassword(viewModel.password)
+                        : null,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -141,8 +157,17 @@ class SignUpView extends StatelessWidget {
                 TextField(
                   obscureText: true,
                   cursorColor: Colors.black,
+                  onChanged: (value) {
+                    viewModel.confirmPassword = value;
+                    if (viewModel.showValidationErrors)
+                      viewModel.notifyListeners();
+                  },
                   decoration: InputDecoration(
                     hintText: 'Confirm your password',
+                    errorText: viewModel.showValidationErrors
+                        ? viewModel.validateConfirmPassword(
+                            viewModel.password, viewModel.confirmPassword)
+                        : null,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -159,7 +184,9 @@ class SignUpView extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      viewModel.onSignUp();
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
@@ -249,7 +276,7 @@ class SignUpView extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: ' Back to Sign In',
+                            text: ' Sign in',
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               color: const Color(0xFFA52A2A),
@@ -264,7 +291,8 @@ class SignUpView extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
+                ),
+                const SizedBox(height: 30),
               ],
             ),
           ),
