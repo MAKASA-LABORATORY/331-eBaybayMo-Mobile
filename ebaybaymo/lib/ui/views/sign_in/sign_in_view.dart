@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
-
 import 'sign_in_viewmodel.dart';
 
 class SignInView extends StatelessWidget {
@@ -67,23 +66,27 @@ class SignInView extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 25),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Email',
+                    'Email Address',
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 5),
                 TextField(
                   cursorColor: Colors.black,
+                  onChanged: viewModel.onEmailChanged,
                   decoration: InputDecoration(
                     hintText: 'Enter your email address',
+                    errorText: viewModel.showEmailError
+                        ? viewModel.validateEmailField()
+                        : null,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -103,16 +106,20 @@ class SignInView extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 5),
                 TextField(
                   obscureText: true,
                   cursorColor: Colors.black,
+                  onChanged: viewModel.onPasswordChanged,
                   decoration: InputDecoration(
                     hintText: 'Enter your password',
+                    errorText: viewModel.showPasswordError
+                        ? viewModel.validatePasswordField()
+                        : null,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -125,16 +132,15 @@ class SignInView extends StatelessWidget {
                     suffixIcon: const Icon(Icons.visibility_off),
                   ),
                 ),
-                const SizedBox(height: 0),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      'Forgot password?',
+                      'Forgot your password?',
                       style: GoogleFonts.poppins(
-                        color: Colors.grey,
                         fontSize: 14,
+                        color: Colors.brown,
                       ),
                     ),
                   ),
@@ -144,7 +150,16 @@ class SignInView extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      viewModel.navigationservice.navigateTo(Routes.homepage);
+                      bool isEmailValid =
+                          viewModel.validateEmailField() == null;
+                      bool isPasswordValid =
+                          viewModel.validatePasswordField() == null;
+
+                      if (isEmailValid && isPasswordValid) {
+                        viewModel.signIn();
+                      } else {
+                        viewModel.triggerValidation();
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),

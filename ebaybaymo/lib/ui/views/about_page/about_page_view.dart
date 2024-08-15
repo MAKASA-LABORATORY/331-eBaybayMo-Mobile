@@ -18,12 +18,12 @@ class AboutPageView extends StackedView<AboutPageViewModel> {
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 10.0), // Add left padding
+          padding: const EdgeInsets.only(left: 10.0),
           child: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,
               color: Color(0xFFA52A2A),
-              size: 30, // Enlarge the back arrow icon
+              size: 30,
             ),
             onPressed: () {
               Navigator.of(context).pop();
