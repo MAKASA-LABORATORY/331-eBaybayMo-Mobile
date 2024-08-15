@@ -12,11 +12,15 @@ import 'package:ebaybaymo/ui/views/homepage_ebaybaymo/homepage_ebaybaymo_view.da
 import 'package:ebaybaymo/ui/views/sign_in/sign_in_view.dart' as _i5;
 import 'package:ebaybaymo/ui/views/sign_up/sign_up_view.dart' as _i6;
 import 'package:ebaybaymo/ui/views/startup/startup_view.dart' as _i3;
+import 'package:ebaybaymo/ui/views/subscription_message/subscription_message_view.dart'
+    as _i10;
+import 'package:ebaybaymo/ui/views/subscription_page/subscription_page_view.dart'
+    as _i9;
 import 'package:ebaybaymo/ui/views/welcome_page/welcome_page_view.dart' as _i4;
-import 'package:flutter/material.dart' as _i9;
+import 'package:flutter/material.dart' as _i11;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i10;
+import 'package:stacked_services/stacked_services.dart' as _i12;
 
 class Routes {
   static const homeView = '/home-view';
@@ -33,6 +37,10 @@ class Routes {
 
   static const about = '/about-page-view';
 
+  static const subscription = '/subscription-page-view';
+
+  static const success_page = '/subscription-message-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -41,6 +49,8 @@ class Routes {
     sign_up,
     homepage,
     about,
+    subscription,
+    success_page,
   };
 }
 
@@ -74,48 +84,68 @@ class StackedRouter extends _i1.RouterBase {
       Routes.about,
       page: _i8.AboutPageView,
     ),
+    _i1.RouteDef(
+      Routes.subscription,
+      page: _i9.SubscriptionPageView,
+    ),
+    _i1.RouteDef(
+      Routes.success_page,
+      page: _i10.SubscriptionMessageView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.WelcomePageView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.WelcomePageView(),
         settings: data,
       );
     },
     _i5.SignInView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.SignInView(),
         settings: data,
       );
     },
     _i6.SignUpView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.SignUpView(),
         settings: data,
       );
     },
     _i7.HomepageEbaybaymoView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.HomepageEbaybaymoView(),
         settings: data,
       );
     },
     _i8.AboutPageView: (data) {
-      return _i9.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.AboutPageView(),
+        settings: data,
+      );
+    },
+    _i9.SubscriptionPageView: (data) {
+      return _i11.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i9.SubscriptionPageView(),
+        settings: data,
+      );
+    },
+    _i10.SubscriptionMessageView: (data) {
+      return _i11.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i10.SubscriptionMessageView(),
         settings: data,
       );
     },
@@ -128,7 +158,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i10.NavigationService {
+extension NavigatorStateExtension on _i12.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -227,6 +257,34 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToSubscription([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.subscription,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToSuccess_page([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.success_page,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -319,6 +377,34 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.about,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSubscription([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.subscription,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSuccess_page([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.success_page,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
