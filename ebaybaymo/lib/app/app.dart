@@ -9,6 +9,8 @@ import 'package:ebaybaymo/ui/views/sign_in/sign_in_view.dart';
 import 'package:ebaybaymo/ui/views/sign_up/sign_up_view.dart';
 import 'package:ebaybaymo/ui/views/homepage_ebaybaymo/homepage_ebaybaymo_view.dart';
 import 'package:ebaybaymo/ui/views/about_page/about_page_view.dart';
+import 'package:ebaybaymo/ui/views/subscription_page/subscription_page_view.dart';
+import 'package:ebaybaymo/ui/views/subscription_message/subscription_message_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -20,6 +22,8 @@ import 'package:ebaybaymo/ui/views/about_page/about_page_view.dart';
     MaterialRoute(page: SignUpView, name: 'sign_up'),
     MaterialRoute(page: HomepageEbaybaymoView, name: 'homepage'),
     MaterialRoute(page: AboutPageView, name: 'about'),
+    MaterialRoute(page: SubscriptionPageView, name: 'subscription'),
+    MaterialRoute(page: SubscriptionMessageView, name: 'success_page'),
 // @stacked-route
   ],
   dependencies: [
