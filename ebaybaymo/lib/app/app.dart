@@ -8,6 +8,7 @@ import 'package:ebaybaymo/ui/views/welcome_page/welcome_page_view.dart';
 import 'package:ebaybaymo/ui/views/sign_in/sign_in_view.dart';
 import 'package:ebaybaymo/ui/views/sign_up/sign_up_view.dart';
 import 'package:ebaybaymo/ui/views/homepage_ebaybaymo/homepage_ebaybaymo_view.dart';
+import 'package:ebaybaymo/ui/views/about_page/about_page_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -18,6 +19,7 @@ import 'package:ebaybaymo/ui/views/homepage_ebaybaymo/homepage_ebaybaymo_view.da
     MaterialRoute(page: SignInView, name: 'sign_in'),
     MaterialRoute(page: SignUpView, name: 'sign_up'),
     MaterialRoute(page: HomepageEbaybaymoView, name: 'homepage'),
+    MaterialRoute(page: AboutPageView, name: 'about'),
 // @stacked-route
   ],
   dependencies: [

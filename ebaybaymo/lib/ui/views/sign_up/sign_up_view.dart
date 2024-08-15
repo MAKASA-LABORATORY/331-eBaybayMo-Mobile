@@ -168,7 +168,7 @@ class SignUpView extends StatelessWidget {
                       backgroundColor: const Color(0xFFA52A2A),
                     ),
                     child: Text(
-                      'Sign Up',
+                      'Sign up',
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         color: Colors.white,
@@ -249,7 +249,7 @@ class SignUpView extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: ' Sign in',
+                            text: ' Back to Sign In',
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               color: const Color(0xFFA52A2A),

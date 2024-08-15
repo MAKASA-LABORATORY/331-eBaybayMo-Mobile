@@ -1,3 +1,4 @@
+import 'package:ebaybaymo/app/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
@@ -86,7 +87,7 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.black, width: 1.0),
-              borderRadius: BorderRadius.circular(12.0),
+              //  borderRadius: BorderRadius.circular(12.0),
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black26,
@@ -102,7 +103,7 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
               // Handle button press
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
+              backgroundColor: const Color(0xFFA52A2A),
               padding: const EdgeInsets.symmetric(
                 horizontal: 24.0,
                 vertical: 12.0,
@@ -134,7 +135,7 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.black, width: 1.0),
-              borderRadius: BorderRadius.circular(12.0),
+              //  borderRadius: BorderRadius.circular(12.0),
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black26,
@@ -163,7 +164,7 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
           child: BottomAppBar(
             color: const Color(0xFFA52A2A),
             shape: const CircularNotchedRectangle(),
-            notchMargin: 5.0,
+            notchMargin: 4.0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -196,13 +197,13 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
                       icon: const Icon(Icons.info, color: Colors.white),
                       iconSize: 35.0,
                       onPressed: () {
-                        // Handle About button press
+                        viewModel.navigationservice.navigateTo(Routes.about);
                       },
                     ),
                     Transform.translate(
                       offset: const Offset(0, -8),
                       child: Text(
-                        'Info',
+                        'About',
                         style: GoogleFonts.poppins(
                           color: Colors.white,
                         ),
@@ -223,7 +224,7 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
           shape: BoxShape.circle,
           color: const Color(0xFFA52A2A),
           border: Border.all(
-              color: const Color.fromARGB(255, 221, 73, 73), width: 4.0),
+              color: const Color.fromARGB(255, 221, 73, 73), width: 3.0),
         ),
         child: Center(
           child: IconButton(

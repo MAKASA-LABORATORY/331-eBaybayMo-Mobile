@@ -82,6 +82,8 @@ class WelcomePageView extends StackedView<WelcomePageViewModel> {
                       'Login',
                       style: GoogleFonts.poppins(
                         color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -89,7 +91,9 @@ class WelcomePageView extends StackedView<WelcomePageViewModel> {
                 const SizedBox(width: 20),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      viewModel.navigationservice.navigateTo(Routes.sign_up);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFA52A2A),
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
@@ -101,6 +105,8 @@ class WelcomePageView extends StackedView<WelcomePageViewModel> {
                       'Register',
                       style: GoogleFonts.poppins(
                         color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
