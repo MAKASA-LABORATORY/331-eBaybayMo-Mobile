@@ -11,6 +11,8 @@ class SignUpViewModel extends AppBaseViewModel with ValidationMixin {
   String password = '';
   String confirmPassword = '';
   bool showValidationErrors = false;
+  bool isPasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
 
   bool validateForm() {
     bool isValid = validateEmail(email) == null &&
@@ -27,5 +29,15 @@ class SignUpViewModel extends AppBaseViewModel with ValidationMixin {
     if (validateForm()) {
       _navigationService.navigateTo(Routes.sign_in);
     }
+  }
+
+  void togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    notifyListeners();
+  }
+
+  void toggleConfirmPasswordVisibility() {
+    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    notifyListeners();
   }
 }

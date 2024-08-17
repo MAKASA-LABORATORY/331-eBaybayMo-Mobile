@@ -212,12 +212,12 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
           ],
         ),
         bottomNavigationBar: SizedBox(
-          height: 92.0,
+          height: 80.0,
           child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
-            ),
+            // borderRadius: const BorderRadius.only(
+            //   topLeft: Radius.circular(30.0),
+            //   topRight: Radius.circular(30.0),
+            // ),
             child: BottomAppBar(
               color: const Color(0xFFA52A2A),
               shape: const CircularNotchedRectangle(),
@@ -230,10 +230,8 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.home, color: Colors.white),
-                        iconSize: 35.0,
-                        onPressed: () {
-                          // Handle Home button press
-                        },
+                        iconSize: 30.0,
+                        onPressed: () {},
                       ),
                       GestureDetector(
                         onTap: () {},
@@ -255,7 +253,7 @@ class HomepageEbaybaymoView extends StackedView<HomepageEbaybaymoViewModel> {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.info, color: Colors.white),
-                        iconSize: 35.0,
+                        iconSize: 30.0,
                         onPressed: () {
                           viewModel.navigationservice.navigateTo(Routes.about);
                         },
