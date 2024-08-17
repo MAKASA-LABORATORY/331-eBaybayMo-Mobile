@@ -7,8 +7,8 @@ import 'package:stacked_services/stacked_services.dart';
 class SubscriptionMessageViewModel extends AppBaseViewModel {
   final NavigationService _navigationService = locator<NavigationService>();
   void startNavigation() {
-    Future.delayed(const Duration(seconds: 3), () {
-      _navigationService.navigateTo(Routes.homepage);
+    Future.delayed(const Duration(seconds: 4), () {
+      _navigationService.navigateTo(Routes.dashboard);
     });
   }
 }

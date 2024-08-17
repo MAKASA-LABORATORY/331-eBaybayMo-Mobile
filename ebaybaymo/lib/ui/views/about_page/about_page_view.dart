@@ -58,7 +58,7 @@ class AboutPageView extends StackedView<AboutPageViewModel> {
                   ),
                   TextSpan(
                     text:
-                        ' creates a Baybayin translator for the continuity of the Filipino alphabetic culture. An app that uses machine learning to recognize Baybayin characters and convert them into letters. Capture Baybayin character, and the app converts it instantly.',
+                        ' an app that uses machine learning to trasnslate  Baybayin characters into letters while building a community committed to preserving and celebrating Filipino script. Capture Baybayin characters with the app for instant translation and engage in a movement to revive this cultural heritage.',
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.black,

@@ -116,8 +116,8 @@ class SignUpView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                TextField(
-                  obscureText: true,
+                         TextField(
+                  obscureText: !viewModel.isPasswordVisible,
                   cursorColor: Colors.black,
                   onChanged: (value) {
                     viewModel.password = value;
@@ -138,7 +138,12 @@ class SignUpView extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    suffixIcon: const Icon(Icons.visibility_off),
+                    suffixIcon: IconButton(
+                      icon: Icon(viewModel.isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: viewModel.togglePasswordVisibility,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -155,7 +160,7 @@ class SignUpView extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 TextField(
-                  obscureText: true,
+                  obscureText: !viewModel.isConfirmPasswordVisible,
                   cursorColor: Colors.black,
                   onChanged: (value) {
                     viewModel.confirmPassword = value;
@@ -177,7 +182,12 @@ class SignUpView extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    suffixIcon: const Icon(Icons.visibility_off),
+                    suffixIcon: IconButton(
+                      icon: Icon(viewModel.isConfirmPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: viewModel.toggleConfirmPasswordVisibility,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 30),

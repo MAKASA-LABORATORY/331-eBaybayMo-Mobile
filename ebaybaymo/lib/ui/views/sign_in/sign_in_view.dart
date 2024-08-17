@@ -112,7 +112,7 @@ class SignInView extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 TextField(
-                  obscureText: true,
+                  obscureText: !viewModel.isPasswordVisible,
                   cursorColor: Colors.black,
                   onChanged: viewModel.onPasswordChanged,
                   decoration: InputDecoration(
@@ -129,7 +129,12 @@ class SignInView extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    suffixIcon: const Icon(Icons.visibility_off),
+                    suffixIcon: IconButton(
+                      icon: Icon(viewModel.isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: viewModel.togglePasswordVisibility,
+                    ),
                   ),
                 ),
                 Align(
