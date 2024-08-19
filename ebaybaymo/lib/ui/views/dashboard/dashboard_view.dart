@@ -4,10 +4,13 @@ import 'package:ebaybaymo/app/app.router.dart';
 import 'package:ebaybaymo/ui/views/dashboard/dashboard_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class DashboardView extends StatelessWidget {
-  const DashboardView({Key? key}) : super(key: key);
+  final GoogleSignInAccount user;
+
+  const DashboardView({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +70,58 @@ class DashboardView extends StatelessWidget {
                 backgroundColor: const Color(0xFFA52A2A),
                 leading: Padding(
                   padding: const EdgeInsets.only(left: 15.0),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.person,
-                        color: Color(0xFFA52A2A),
-                      ),
-                      onPressed: () {},
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Logout your account',
+                              style: GoogleFonts.poppins(fontSize: 20.0),
+                            ),
+                            content: Text(
+                              'Are you sure you want to logout?',
+                              style: GoogleFonts.poppins(fontSize: 15.0),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pop(); 
+                                },
+                                child: Text(
+                                  'No',
+                                  style:
+                                      GoogleFonts.poppins(color: Colors.black),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  viewModel.logout();
+                                },
+                                child: Text(
+                                  'Yes',
+                                  style:
+                                      GoogleFonts.poppins(color: Colors.black),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey.shade200,
+                      child: user.photoUrl != null
+                          ? ClipOval(
+                              child: Image.network(
+                                user.photoUrl!,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : const Icon(Icons.person, size: 30),
                     ),
                   ),
                 ),
@@ -89,7 +136,7 @@ class DashboardView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Max Angelo Perin',
+                      user.displayName!,
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontSize: 15.0,
@@ -198,10 +245,6 @@ class DashboardView extends StatelessWidget {
                 ),
               ),
               bottomNavigationBar: ClipRRect(
-                // borderRadius: const BorderRadius.only(
-                //   topLeft: Radius.circular(20.0),
-                //   topRight: Radius.circular(20.0),
-                // ),
                 child: Container(
                   color: const Color(0xFFA52A2A),
                   padding: const EdgeInsets.symmetric(vertical: 10.0),

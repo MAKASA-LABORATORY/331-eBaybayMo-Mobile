@@ -18,6 +18,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final snackbarService = locator<SnackbarService>();
+
+    snackbarService.registerSnackbarConfig(
+      SnackbarConfig(
+        backgroundColor: const Color.fromARGB(255, 65, 64, 64),
+        borderRadius: 20,
+        //    duration: Constants.defDuration,
+        snackPosition: SnackPosition.BOTTOM,
+        textColor: const Color.fromARGB(255, 255, 255, 255),
+        margin: const EdgeInsets.all(10),
+        dismissDirection: DismissDirection.horizontal,
+        padding: const EdgeInsets.fromLTRB(16, 10, 0, 16),
+      ),
+    );
+
     return MaterialApp(
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
