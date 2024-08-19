@@ -116,7 +116,7 @@ class SignUpView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                         TextField(
+                TextField(
                   obscureText: !viewModel.isPasswordVisible,
                   cursorColor: Colors.black,
                   onChanged: (value) {
@@ -226,48 +226,58 @@ class SignUpView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: const Offset(0, 1),
+                    InkWell(
+                      onTap: () {
+                        viewModel.onGoogleLogoTapped();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                        ),
+                        child: CircleAvatar(
+                          radius: 23,
+                          backgroundColor: Colors.white,
+                          child: SvgPicture.asset(
+                            'lib/resources/images/logo_google.svg',
+                            height: 30,
+                            width: 30,
                           ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        radius: 23,
-                        backgroundColor: Colors.white,
-                        child: SvgPicture.asset(
-                          'lib/resources/images/logo_google.svg',
-                          height: 30,
-                          width: 30,
                         ),
                       ),
                     ),
                     const SizedBox(width: 20),
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: const Offset(0, 1),
+                    InkWell(
+                      onTap: () {
+                        viewModel.onFacebookLogoTapped();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                        ),
+                        child: CircleAvatar(
+                          radius: 23,
+                          backgroundColor: Colors.white,
+                          child: SvgPicture.asset(
+                            'lib/resources/images/fb.svg',
+                            height: 30,
+                            width: 30,
                           ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        radius: 23,
-                        backgroundColor: Colors.white,
-                        child: SvgPicture.asset(
-                          'lib/resources/images/fb.svg',
-                          height: 30,
-                          width: 30,
                         ),
                       ),
                     ),
