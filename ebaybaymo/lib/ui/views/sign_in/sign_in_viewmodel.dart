@@ -1,12 +1,17 @@
 import 'package:ebaybaymo/app/app.locator.dart';
 import 'package:ebaybaymo/app/app.router.dart';
 import 'package:ebaybaymo/app/app_base_view_model.dart';
+import 'package:ebaybaymo/models/user_auth.dart';
+import 'package:ebaybaymo/services/api/auth/auth_api_service.dart';
+import 'package:ebaybaymo/services/api/auth/auth_service_impl.dart';
 import 'package:ebaybaymo/google_facebook_auth/google_sign_in_api.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'validation_mixin.dart';
 
 class SignInViewModel extends AppBaseViewModel with ValidationMixin {
   final NavigationService _navigationService = locator<NavigationService>();
+  final AuthApiService _authApiService = AuthServiceImpl();
+
   String _email = '';
   String _password = '';
 
@@ -43,9 +48,21 @@ class SignInViewModel extends AppBaseViewModel with ValidationMixin {
     notifyListeners();
   }
 
-  void signIn() {
+  Future<void> signIn() async {
     if (validateEmailField() == null && validatePasswordField() == null) {
-      _navigationService.navigateTo(Routes.dashboard);
+      final user = User(email: _email, password: _password, username: '');
+
+      final response = await _authApiService.loginUser(user);
+
+      if (response.statusCode == 200) {
+        // Handle successful login
+        _navigationService.navigateTo(Routes.dashboardSigninView);
+        snackbarService.showSnackbar(message: 'Sign in Successful');
+      } else {
+        // Handle error
+        snackbarService.showSnackbar(
+            message: 'Sign in Failed: ${response.data['error']}');
+      }
     } else {
       triggerValidation();
     }

@@ -1,7 +1,7 @@
 class Constants {
   Constants._();
 
-  static const baseUrl = 'https://onepc.online';
+  static const baseUrl = 'http://192.168.243.245:8000';
   static const errorLogin = 'Login Failed';
   static const errorLogout = 'Logout Failed';
   static const errorRegister = 'Register Failed';

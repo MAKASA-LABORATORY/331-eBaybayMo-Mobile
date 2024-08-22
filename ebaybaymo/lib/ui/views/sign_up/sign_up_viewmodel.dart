@@ -1,13 +1,19 @@
 // lib/ui/views/sign_up/sign_up_viewmodel.dart
+
 import 'package:ebaybaymo/app/app.locator.dart';
 import 'package:ebaybaymo/app/app.router.dart';
 import 'package:ebaybaymo/app/app_base_view_model.dart';
 import 'package:ebaybaymo/google_facebook_auth/google_sign_in_api.dart';
+import 'package:ebaybaymo/models/user_auth.dart';
+import 'package:ebaybaymo/services/api/auth/auth_api_service.dart';
 import 'package:ebaybaymo/ui/views/sign_up/validation_mixin.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class SignUpViewModel extends AppBaseViewModel with ValidationMixin {
   final NavigationService _navigationService = locator<NavigationService>();
+  final AuthApiService _authApiService = locator<AuthApiService>();
+  final SnackbarService _snackbarService = locator<SnackbarService>();
+
   String email = '';
   String password = '';
   String confirmPassword = '';
@@ -23,12 +29,33 @@ class SignUpViewModel extends AppBaseViewModel with ValidationMixin {
     return isValid;
   }
 
-  void onSignUp() {
+  Future<void> onSignUp() async {
     showValidationErrors = true;
     notifyListeners();
 
     if (validateForm()) {
-      _navigationService.navigateTo(Routes.sign_in);
+      setBusy(true);
+
+      try {
+        final user = User(
+            email: email, password: password, username: email.split('@')[0]);
+        final response = await _authApiService.registerUser(user);
+
+        if (response.statusCode == 200) {
+          _snackbarService.showSnackbar(message: 'Registration Successful');
+          _navigationService.navigateTo(Routes.sign_in);
+        } else {
+          _snackbarService.showSnackbar(
+            message: response.data['error'] ?? 'Registration Failed',
+          );
+        }
+      } catch (e) {
+        _snackbarService.showSnackbar(
+          message: 'An error occurred during registration: $e',
+        );
+      } finally {
+        setBusy(false);
+      }
     }
   }
 
@@ -46,13 +73,13 @@ class SignUpViewModel extends AppBaseViewModel with ValidationMixin {
     final user = await GoogleSignInApi.login();
 
     if (user == null) {
-      snackbarService.showSnackbar(message: 'Sign in Failed');
+      _snackbarService.showSnackbar(message: 'Sign in Failed');
     } else {
       _navigationService.navigateTo(
         Routes.dashboard,
         arguments: DashboardViewArguments(user: user),
       );
-      snackbarService.showSnackbar(message: 'Sign in Successfully');
+      _snackbarService.showSnackbar(message: 'Sign in Successfully');
     }
   }
 
