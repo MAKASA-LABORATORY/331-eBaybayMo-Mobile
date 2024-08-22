@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ebaybaymo/utils/constants.dart';
 
 class DioClient {
   static DioClient? _singleton;
@@ -10,10 +11,10 @@ class DioClient {
   Dio get instance => _dio;
   Dio createDioClient() {
     final Dio dio = Dio(BaseOptions(
-        //  baseUrl: '${Constants.baseUrl}/api/v1',
-        receiveTimeout: const Duration(seconds: 15),
-        connectTimeout: const Duration(seconds: 15),
-        sendTimeout: const Duration(seconds: 15),
+        baseUrl: Constants.baseUrl,
+        receiveTimeout: const Duration(seconds: 15000),
+        connectTimeout: const Duration(seconds: 15000),
+        sendTimeout: const Duration(seconds: 15000),
         headers: {
           Headers.acceptHeader: 'application/json',
           Headers.contentTypeHeader: 'application/json',

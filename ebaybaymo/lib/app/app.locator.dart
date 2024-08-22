@@ -6,6 +6,12 @@
 
 // ignore_for_file: public_member_api_docs, implementation_imports, depend_on_referenced_packages
 
+import 'package:ebaybaymo/services/api/api_service_impl.dart';
+import 'package:ebaybaymo/services/api/api_service_service.dart';
+import 'package:ebaybaymo/services/api/auth/auth_api_service.dart';
+import 'package:ebaybaymo/services/api/auth/auth_service_impl.dart';
+import 'package:ebaybaymo/services/shared_preference/shared_preference_impl.dart';
+import 'package:ebaybaymo/services/shared_preference/shared_preference_service.dart';
 import 'package:stacked_services/src/bottom_sheet/bottom_sheet_service.dart';
 import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
@@ -26,6 +32,11 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => NavigationService());
+  locator.registerLazySingleton<AuthApiService>(() => AuthServiceImpl());
+  locator.registerLazySingleton<SharedPreferenceService>(
+      () => SharedPreferenceServiceImpl());
   locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton<ApiServiceService>(() => ApiServiceImpl(
+        sharedPreferenceService: locator<SharedPreferenceService>(),
+      ));
 }
-

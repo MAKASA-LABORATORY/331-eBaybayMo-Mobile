@@ -1,6 +1,7 @@
 import 'dart:io'; // Required for exit(0)
 
 import 'package:ebaybaymo/app/app.router.dart';
+import 'package:ebaybaymo/models/user_auth.dart';
 import 'package:ebaybaymo/ui/views/dashboard/dashboard_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -87,8 +88,7 @@ class DashboardView extends StatelessWidget {
                             actions: [
                               TextButton(
                                 onPressed: () {
-                                  Navigator.of(context)
-                                      .pop(); 
+                                  Navigator.of(context).pop();
                                 },
                                 child: Text(
                                   'No',
@@ -136,7 +136,7 @@ class DashboardView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      user.displayName!,
+                      user.displayName ?? 'Guest',
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontSize: 15.0,

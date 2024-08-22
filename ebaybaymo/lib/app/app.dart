@@ -13,6 +13,7 @@ import 'package:ebaybaymo/ui/views/subscription_page/subscription_page_view.dart
 import 'package:ebaybaymo/ui/views/subscription_message/subscription_message_view.dart';
 import 'package:ebaybaymo/ui/views/dashboard/dashboard_view.dart';
 import 'package:ebaybaymo/ui/views/check_auth/check_auth_view.dart';
+import 'package:ebaybaymo/ui/views/dashboard_signin/dashboard_signin_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -31,6 +32,7 @@ import 'package:ebaybaymo/ui/views/check_auth/check_auth_view.dart';
     MaterialRoute(page: SubscriptionMessageView, name: 'success_page'),
     MaterialRoute(page: DashboardView, name: 'dashboard'),
     MaterialRoute(page: CheckAuthView, initial: true),
+    MaterialRoute(page: DashboardSigninView),
 // @stacked-route
   ],
   dependencies: [

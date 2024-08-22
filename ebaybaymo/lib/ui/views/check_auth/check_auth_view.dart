@@ -8,7 +8,7 @@ class CheckAuthView extends StackedView<CheckAuthViewModel> {
   @override
   void onViewModelReady(CheckAuthViewModel viewModel) {
     super.onViewModelReady(viewModel);
-    viewModel.checkAuthentication(); 
+    viewModel.checkAuthentication();
   }
 
   @override
@@ -20,7 +20,7 @@ class CheckAuthView extends StackedView<CheckAuthViewModel> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: const Center(
-        child: CircularProgressIndicator(), 
+        child: CircularProgressIndicator(),
       ),
     );
   }
