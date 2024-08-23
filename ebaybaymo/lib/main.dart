@@ -22,8 +22,8 @@ class MainApp extends StatelessWidget {
 
     snackbarService.registerSnackbarConfig(
       SnackbarConfig(
-        backgroundColor: const Color.fromARGB(255, 65, 64, 64),
-        borderRadius: 20,
+        backgroundColor: Color.fromARGB(255, 96, 95, 95),
+        borderRadius: 10,
         //    duration: Constants.defDuration,
         snackPosition: SnackPosition.BOTTOM,
         textColor: const Color.fromARGB(255, 255, 255, 255),

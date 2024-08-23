@@ -1,3 +1,9 @@
+import 'package:ebaybaymo/services/api/api_service_impl.dart';
+import 'package:ebaybaymo/services/api/api_service_service.dart';
+import 'package:ebaybaymo/services/api/auth/auth_api_service.dart';
+import 'package:ebaybaymo/services/api/auth/auth_service_impl.dart';
+import 'package:ebaybaymo/services/shared_preference/shared_preference_impl.dart';
+import 'package:ebaybaymo/services/shared_preference/shared_preference_service.dart';
 import 'package:ebaybaymo/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:ebaybaymo/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:ebaybaymo/ui/views/home/home_view.dart';
@@ -7,7 +13,6 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:ebaybaymo/ui/views/welcome_page/welcome_page_view.dart';
 import 'package:ebaybaymo/ui/views/sign_in/sign_in_view.dart';
 import 'package:ebaybaymo/ui/views/sign_up/sign_up_view.dart';
-import 'package:ebaybaymo/ui/views/homepage_ebaybaymo/homepage_ebaybaymo_view.dart';
 import 'package:ebaybaymo/ui/views/about_page/about_page_view.dart';
 import 'package:ebaybaymo/ui/views/subscription_page/subscription_page_view.dart';
 import 'package:ebaybaymo/ui/views/subscription_message/subscription_message_view.dart';
@@ -26,7 +31,6 @@ import 'package:ebaybaymo/ui/views/dashboard_signin/dashboard_signin_view.dart';
     ),
     MaterialRoute(page: SignInView, name: 'sign_in'),
     MaterialRoute(page: SignUpView, name: 'sign_up'),
-    MaterialRoute(page: HomepageEbaybaymoView, name: 'homepage'),
     MaterialRoute(page: AboutPageView, name: 'about'),
     MaterialRoute(page: SubscriptionPageView, name: 'subscription'),
     MaterialRoute(page: SubscriptionMessageView, name: 'success_page'),
@@ -39,6 +43,13 @@ import 'package:ebaybaymo/ui/views/dashboard_signin/dashboard_signin_view.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
+    LazySingleton(classType: ApiServiceImpl, asType: ApiServiceService),
+    LazySingleton(classType: AuthServiceImpl, asType: AuthApiService),
+    LazySingleton(
+        classType: SharedPreferenceServiceImpl,
+        asType: SharedPreferenceService),
+    LazySingleton(classType: SnackbarService),
+
     // @stacked-servicedart
   ],
   bottomsheets: [

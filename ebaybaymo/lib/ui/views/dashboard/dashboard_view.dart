@@ -179,35 +179,91 @@ class DashboardView extends StatelessWidget {
                               ),
                             ],
                           ),
+                          // Display the processed image result here
+                          child: viewModel.recognizedText != null
+                              ? Center(
+                                  child: Text(
+                                    viewModel.recognizedText!,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    'Processed image result',
+                                    style: GoogleFonts.poppins(),
+                                  ),
+                                ),
                         ),
                       ),
                       const SizedBox(height: 10.0),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: viewModel.isBusy
+                            ? null
+                            : () {
+                                viewModel.transliterateImage();
+                              },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFA52A2A),
+                          foregroundColor: Colors.white,
+                          backgroundColor:
+                              const Color(0xFFA52A2A), // Text and icon color
                           padding: const EdgeInsets.symmetric(
                             horizontal: 24.0,
                             vertical: 12.0,
                           ),
+                          elevation: 0, // Optional: Remove shadow if needed
+                          shadowColor: Colors
+                              .transparent, // Optional: Remove shadow if needed
+                        ).copyWith(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color(0xFFA52A2A)),
+                          overlayColor: MaterialStateProperty.all<Color>(
+                              const Color(0xFFA52A2A)), // Keep color on press
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors
+                              .white), // Ensure text and icon color remains white
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Icons.arrow_upward,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(width: 8.0),
-                            Text(
-                              'Transliterate',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18.0,
-                                color: Colors.white,
+                        child: viewModel.isBusy
+                            ? Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const SizedBox(
+                                    width: 24.0,
+                                    height: 24.0,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.0,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10.0),
+                                  Text(
+                                    'Processing...',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.arrow_upward,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 8.0),
+                                  Text(
+                                    'Transliterate',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
                       ),
                       const SizedBox(height: 10.0),
                       Expanded(
@@ -225,6 +281,7 @@ class DashboardView extends StatelessWidget {
                               ),
                             ],
                           ),
+                          // Display the captured image here
                           child: viewModel.pickedImage != null
                               ? Image.file(
                                   viewModel.pickedImage!,
@@ -234,7 +291,7 @@ class DashboardView extends StatelessWidget {
                                 )
                               : Center(
                                   child: Text(
-                                    'No image selected',
+                                    'Captured image',
                                     style: GoogleFonts.poppins(),
                                   ),
                                 ),
