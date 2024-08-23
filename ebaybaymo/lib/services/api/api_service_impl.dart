@@ -7,9 +7,11 @@ class ApiServiceImpl implements ApiServiceService {
   ApiServiceImpl({
     Dio? dio,
     required this.sharedPreferenceService,
-  }) : _dio = dio ?? DioClient().instance;
+  })  : _dio = dio ?? DioClient().instance,
+        _directDio = dio ?? DioClient().directInstance;
 
   final Dio _dio;
+  final Dio _directDio;
   final SharedPreferenceService sharedPreferenceService;
 
   @override
@@ -43,6 +45,47 @@ class ApiServiceImpl implements ApiServiceService {
           headers: {
             'Content-Type': 'multipart/form-data',
             'session-id': sessionId, // Include the session ID here
+          },
+        ),
+      );
+
+      return response;
+    } on DioException catch (e) {
+      return e.response ??
+          Response(
+            requestOptions: RequestOptions(path: ''),
+            statusCode: 500,
+            statusMessage: 'Failed to upload image',
+            data: {'error': e.message},
+          );
+    } catch (e) {
+      return Response(
+        requestOptions: RequestOptions(path: ''),
+        statusCode: 500,
+        statusMessage: 'Unexpected error occurred',
+        data: {'error': e.toString()},
+      );
+    }
+  }
+
+  @override
+  Future<Response> checkImageDirect(String imagePath) async {
+    try {
+      // Create a FormData instance
+      FormData formData = FormData.fromMap({
+        "baybayin_photo": await MultipartFile.fromFile(
+          imagePath,
+          filename: imagePath.split('/').last,
+        ),
+      });
+
+      // Send a POST request to the external API without the session ID
+      final response = await _directDio.post(
+        'check_image/', // Use the external API endpoint directly
+        data: formData,
+        options: Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
           },
         ),
       );

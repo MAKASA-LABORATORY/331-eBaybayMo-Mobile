@@ -126,4 +126,49 @@ class AuthServiceImpl implements AuthApiService {
       );
     }
   }
+
+   @override
+  Future<Response> getCurrentUser() async {
+    try {
+      // Retrieve the sessionId from SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      final sessionId = prefs.getString(sessionIdKey);
+
+      if (sessionId == null) {
+        return Response(
+          requestOptions: RequestOptions(path: ''),
+          statusCode: 401,
+          statusMessage: 'Session ID not found. User may not be logged in.',
+          data: {'error': 'Session ID not found'},
+        );
+      }
+
+      // Send request to get the current user
+      final response = await _dio.get(
+        '/currentUser',
+        options: Options(
+          headers: {
+            'session-id': sessionId,
+          },
+        ),
+      );
+
+      return response;
+    } on DioException catch (e) {
+      return e.response ??
+          Response(
+            requestOptions: RequestOptions(path: ''),
+            statusCode: 500,
+            statusMessage: 'Failed to retrieve current user',
+            data: {'error': e.message},
+          );
+    } catch (e) {
+      return Response(
+        requestOptions: RequestOptions(path: ''),
+        statusCode: 500,
+        statusMessage: 'Unexpected error occurred',
+        data: {'error': e.toString()},
+      );
+    }
+  }
 }

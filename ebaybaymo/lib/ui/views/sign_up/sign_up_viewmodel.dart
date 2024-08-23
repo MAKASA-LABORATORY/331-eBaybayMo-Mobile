@@ -20,6 +20,12 @@ class SignUpViewModel extends AppBaseViewModel with ValidationMixin {
   bool showValidationErrors = false;
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
+  bool isLoading = false;
+
+  void setLoading(bool value) {
+    isLoading = value;
+    notifyListeners();
+  }
 
   bool validateForm() {
     bool isValid = validateEmail(email) == null &&

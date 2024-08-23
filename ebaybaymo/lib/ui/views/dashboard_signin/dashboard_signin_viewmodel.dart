@@ -17,9 +17,11 @@ class DashboardSigninViewModel extends AppBaseViewModel {
 
   File? _pickedImage;
   String? _recognizedText;
+  Map<String, dynamic>? _currentUser;
 
   File? get pickedImage => _pickedImage;
   String? get recognizedText => _recognizedText;
+  Map<String, dynamic>? get currentUser => _currentUser;
 
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -71,6 +73,31 @@ class DashboardSigninViewModel extends AppBaseViewModel {
     } else {
       _snackbarService.showSnackbar(
           message: 'Logout failed: ${response.data['error']}');
+    }
+  }
+
+  Future<void> getCurrentUser() async {
+    setBusy(true);
+
+    try {
+      final response = await _authApiService.getCurrentUser();
+
+      if (response.statusCode == 200) {
+        _currentUser = response.data['user'];
+        _snackbarService.showSnackbar(message: 'User retrieved successfully');
+      } else {
+        _snackbarService.showSnackbar(
+            message: 'Failed to retrieve user: ${response.data['error']}');
+      }
+    } on DioException catch (e) {
+      _snackbarService.showSnackbar(
+          message: 'Failed to retrieve user: ${e.message}');
+    } catch (e) {
+      _snackbarService.showSnackbar(
+          message: 'An unexpected error occurred: ${e.toString()}');
+    } finally {
+      setBusy(false);
+      notifyListeners();
     }
   }
 }
