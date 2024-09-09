@@ -8,6 +8,7 @@ class CheckAuthView extends StackedView<CheckAuthViewModel> {
   @override
   void onViewModelReady(CheckAuthViewModel viewModel) {
     super.onViewModelReady(viewModel);
+    // Call the function to check both custom API and Google sign-in authentication
     viewModel.checkAuthentication();
   }
 
@@ -19,8 +20,10 @@ class CheckAuthView extends StackedView<CheckAuthViewModel> {
   ) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: const Center(
-        child: CircularProgressIndicator(),
+      body: Center(
+        child: viewModel.isLoading
+            ? const CircularProgressIndicator()
+            : const SizedBox.shrink(), // Replace with other widgets if needed
       ),
     );
   }

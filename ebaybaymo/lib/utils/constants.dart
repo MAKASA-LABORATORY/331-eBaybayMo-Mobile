@@ -1,7 +1,7 @@
 class Constants {
   Constants._();
 
-  static const baseUrl = 'http://192.168.55.245:8000';
+  static const baseUrl = 'https://ebaybaymo-server-b084d082cda7.herokuapp.com/';
   static const errorLogin = 'Login Failed';
   static const errorLogout = 'Logout Failed';
   static const errorRegister = 'Register Failed';

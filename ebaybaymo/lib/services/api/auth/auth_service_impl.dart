@@ -16,7 +16,7 @@ class AuthServiceImpl implements AuthApiService {
     try {
       final data = user.toJson();
 
-      final response = await _dio.post('/register', data: data);
+      final response = await _dio.post('/auth/register', data: data);
 
       return response;
     } on DioException catch (e) {
@@ -45,7 +45,7 @@ class AuthServiceImpl implements AuthApiService {
         'password': user.password,
       };
 
-      final response = await _dio.post('/login', data: data);
+      final response = await _dio.post('/auth/login', data: data);
 
       if (response.statusCode == 200) {
         // Extract the sessionId from the response
@@ -94,16 +94,15 @@ class AuthServiceImpl implements AuthApiService {
       }
 
       final response = await _dio.post(
-        '/logout',
+        '/auth/logout',
         options: Options(
           headers: {
-            'session-id': sessionId, 
+            'session-id': sessionId,
           },
         ),
       );
 
       if (response.statusCode == 200) {
-    
         await prefs.remove(sessionIdKey);
         print('Session ID removed.');
       }
@@ -127,7 +126,7 @@ class AuthServiceImpl implements AuthApiService {
     }
   }
 
-   @override
+  @override
   Future<Response> getCurrentUser() async {
     try {
       // Retrieve the sessionId from SharedPreferences
@@ -145,7 +144,7 @@ class AuthServiceImpl implements AuthApiService {
 
       // Send request to get the current user
       final response = await _dio.get(
-        '/currentUser',
+        '/auth/user_profile',
         options: Options(
           headers: {
             'session-id': sessionId,

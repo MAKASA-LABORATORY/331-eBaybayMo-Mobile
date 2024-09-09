@@ -24,7 +24,7 @@ class SignUpView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
+                      height: MediaQuery.of(context).size.height * 0.03,
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -59,7 +59,7 @@ class SignUpView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 30),
                     Text(
                       'Create new account',
                       style: GoogleFonts.poppins(
@@ -242,7 +242,10 @@ class SignUpView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            viewModel.setLoading(true);
+                            await Future.delayed(const Duration(seconds: 2));
+                            viewModel.setLoading(false);
                             viewModel.onGoogleLogoTapped();
                           },
                           child: Container(

@@ -124,23 +124,32 @@ class DashboardSigninView extends StackedView<DashboardSigninViewModel> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Welcome, ${viewModel.currentUser?['username'] ?? 'User'}',
+                'Welcome,',
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 15.0,
+                ),
+              ),
+              Text(
+                viewModel.currentUser?['username'] ?? 'User',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              // The user's name can be dynamically displayed here
+              // Additional widgets can be added here
             ],
           ),
           actions: <Widget>[
             IconButton(
               icon: const Icon(
-                Icons.settings,
+                Icons.history_edu_sharp,
                 color: Colors.white,
+                size: 30.0,
               ),
               onPressed: () {
-                viewModel.navigationservice.navigateTo(Routes.subscription);
+                viewModel.navigationservice.navigateTo(Routes.history_page);
               },
             ),
           ],
@@ -166,20 +175,16 @@ class DashboardSigninView extends StackedView<DashboardSigninViewModel> {
                         ),
                       ],
                     ),
-                    // Display the processed image result here
-                    child: viewModel.recognizedText != null
-                        ? Center(
-                            child: Text(
-                              viewModel.recognizedText!,
-                              style: GoogleFonts.poppins(
-                                fontSize: 50.0,
-                                color: Colors.black,
-                              ),
-                            ),
+                    child: viewModel.pickedImage != null
+                        ? Image.file(
+                            viewModel.pickedImage!,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
                           )
                         : Center(
                             child: Text(
-                              'Processed image result',
+                              'Captured image',
                               style: GoogleFonts.poppins(),
                             ),
                           ),
@@ -194,22 +199,20 @@ class DashboardSigninView extends StackedView<DashboardSigninViewModel> {
                         },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor:
-                        const Color(0xFFA52A2A), // Text and icon color
+                    backgroundColor: const Color(0xFFA52A2A),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24.0,
                       vertical: 12.0,
                     ),
-                    elevation: 0, // Optional: Remove shadow if needed
-                    shadowColor:
-                        Colors.transparent, // Optional: Remove shadow if needed
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
                   ).copyWith(
                     backgroundColor: MaterialStateProperty.all<Color>(
                         const Color(0xFFA52A2A)),
                     overlayColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFFA52A2A)), // Keep color on press
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors
-                        .white), // Ensure text and icon color remains white
+                        const Color(0xFFA52A2A)),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   child: viewModel.isBusy
                       ? Row(
@@ -238,7 +241,7 @@ class DashboardSigninView extends StackedView<DashboardSigninViewModel> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(
-                              Icons.arrow_upward,
+                              Icons.arrow_downward,
                               color: Colors.white,
                             ),
                             const SizedBox(width: 8.0),
@@ -268,17 +271,20 @@ class DashboardSigninView extends StackedView<DashboardSigninViewModel> {
                         ),
                       ],
                     ),
-                    // Display the captured image here
-                    child: viewModel.pickedImage != null
-                        ? Image.file(
-                            viewModel.pickedImage!,
-                            width: double.infinity,
-                            height: double.infinity,
-                            fit: BoxFit.cover,
+                    // Display the processed image result here
+                    child: viewModel.recognizedText != null
+                        ? Center(
+                            child: Text(
+                              viewModel.recognizedText!,
+                              style: GoogleFonts.poppins(
+                                fontSize: 100.0,
+                                color: Colors.black,
+                              ),
+                            ),
                           )
                         : Center(
                             child: Text(
-                              'Captured image',
+                              'Processed image result',
                               style: GoogleFonts.poppins(),
                             ),
                           ),

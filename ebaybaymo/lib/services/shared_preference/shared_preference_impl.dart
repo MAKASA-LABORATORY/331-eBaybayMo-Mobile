@@ -1,7 +1,6 @@
 import 'package:ebaybaymo/services/shared_preference/shared_preference_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class SharedPreferenceServiceImpl implements SharedPreferenceService {
   static const String sessionIdKey = 'sessionId';
 
