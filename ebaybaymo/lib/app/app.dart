@@ -8,6 +8,7 @@ import 'package:ebaybaymo/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:ebaybaymo/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:ebaybaymo/ui/views/home/home_view.dart';
 import 'package:ebaybaymo/ui/views/startup/startup_view.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:ebaybaymo/ui/views/welcome_page/welcome_page_view.dart';
@@ -19,24 +20,47 @@ import 'package:ebaybaymo/ui/views/subscription_message/subscription_message_vie
 import 'package:ebaybaymo/ui/views/dashboard/dashboard_view.dart';
 import 'package:ebaybaymo/ui/views/check_auth/check_auth_view.dart';
 import 'package:ebaybaymo/ui/views/dashboard_signin/dashboard_signin_view.dart';
+import 'package:ebaybaymo/ui/views/history_image/history_image_view.dart';
 // @stacked-import
 
 @StackedApp(
   routes: [
     MaterialRoute(page: HomeView),
     MaterialRoute(page: StartupView),
-    MaterialRoute(
+    CustomRoute(
       page: WelcomePageView,
       name: 'welcome_page',
+      transitionsBuilder: TransitionsBuilders.zoomIn,
+      durationInMilliseconds: 500,
     ),
-    MaterialRoute(page: SignInView, name: 'sign_in'),
-    MaterialRoute(page: SignUpView, name: 'sign_up'),
+    CustomRoute(
+      page: SignInView,
+      name: 'sign_in',
+      transitionsBuilder: TransitionsBuilders.slideRight,
+      durationInMilliseconds: 400,
+    ),
+    CustomRoute(
+      page: SignUpView,
+      name: 'sign_up',
+      transitionsBuilder: TransitionsBuilders.slideRight,
+      durationInMilliseconds: 400,
+    ),
     MaterialRoute(page: AboutPageView, name: 'about'),
     MaterialRoute(page: SubscriptionPageView, name: 'subscription'),
     MaterialRoute(page: SubscriptionMessageView, name: 'success_page'),
-    MaterialRoute(page: DashboardView, name: 'dashboard'),
+    CustomRoute(
+      page: DashboardView,
+      name: 'dashboard',
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 400,
+    ),
     MaterialRoute(page: CheckAuthView, initial: true),
-    MaterialRoute(page: DashboardSigninView),
+    CustomRoute(
+      page: DashboardSigninView,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    MaterialRoute(page: HistoryImageView, name: 'history_page'),
 // @stacked-route
   ],
   dependencies: [

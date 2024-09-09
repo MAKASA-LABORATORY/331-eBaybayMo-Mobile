@@ -10,6 +10,8 @@ import 'package:ebaybaymo/ui/views/check_auth/check_auth_view.dart' as _i11;
 import 'package:ebaybaymo/ui/views/dashboard/dashboard_view.dart' as _i10;
 import 'package:ebaybaymo/ui/views/dashboard_signin/dashboard_signin_view.dart'
     as _i12;
+import 'package:ebaybaymo/ui/views/history_image/history_image_view.dart'
+    as _i13;
 import 'package:ebaybaymo/ui/views/home/home_view.dart' as _i2;
 import 'package:ebaybaymo/ui/views/sign_in/sign_in_view.dart' as _i5;
 import 'package:ebaybaymo/ui/views/sign_up/sign_up_view.dart' as _i6;
@@ -19,11 +21,11 @@ import 'package:ebaybaymo/ui/views/subscription_message/subscription_message_vie
 import 'package:ebaybaymo/ui/views/subscription_page/subscription_page_view.dart'
     as _i8;
 import 'package:ebaybaymo/ui/views/welcome_page/welcome_page_view.dart' as _i4;
-import 'package:flutter/material.dart' as _i13;
+import 'package:flutter/material.dart' as _i14;
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart' as _i14;
+import 'package:google_sign_in/google_sign_in.dart' as _i15;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i15;
+import 'package:stacked_services/stacked_services.dart' as _i16;
 
 class Routes {
   static const homeView = '/home-view';
@@ -48,6 +50,8 @@ class Routes {
 
   static const dashboardSigninView = '/dashboard-signin-view';
 
+  static const history_page = '/history-image-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -60,6 +64,7 @@ class Routes {
     dashboard,
     checkAuthView,
     dashboardSigninView,
+    history_page,
   };
 }
 
@@ -109,74 +114,100 @@ class StackedRouter extends _i1.RouterBase {
       Routes.dashboardSigninView,
       page: _i12.DashboardSigninView,
     ),
+    _i1.RouteDef(
+      Routes.history_page,
+      page: _i13.HistoryImageView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.WelcomePageView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i4.WelcomePageView(),
+      return _i14.PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const _i4.WelcomePageView(),
         settings: data,
+        transitionsBuilder: data.transition ?? _i1.TransitionsBuilders.zoomIn,
+        transitionDuration: const Duration(milliseconds: 500),
       );
     },
     _i5.SignInView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i5.SignInView(),
+      return _i14.PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const _i5.SignInView(),
         settings: data,
+        transitionsBuilder:
+            data.transition ?? _i1.TransitionsBuilders.slideRight,
+        transitionDuration: const Duration(milliseconds: 400),
       );
     },
     _i6.SignUpView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i6.SignUpView(),
+      return _i14.PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const _i6.SignUpView(),
         settings: data,
+        transitionsBuilder:
+            data.transition ?? _i1.TransitionsBuilders.slideRight,
+        transitionDuration: const Duration(milliseconds: 400),
       );
     },
     _i7.AboutPageView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.AboutPageView(),
         settings: data,
       );
     },
     _i8.SubscriptionPageView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.SubscriptionPageView(),
         settings: data,
       );
     },
     _i9.SubscriptionMessageView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.SubscriptionMessageView(),
         settings: data,
       );
     },
     _i10.DashboardView: (data) {
       final args = data.getArgs<DashboardViewArguments>(nullOk: false);
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) =>
+      return _i14.PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
             _i10.DashboardView(key: args.key, user: args.user),
         settings: data,
+        transitionsBuilder: data.transition ?? _i1.TransitionsBuilders.fadeIn,
+        transitionDuration: const Duration(milliseconds: 400),
       );
     },
     _i11.CheckAuthView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.CheckAuthView(),
         settings: data,
       );
     },
     _i12.DashboardSigninView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i12.DashboardSigninView(),
+      return _i14.PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const _i12.DashboardSigninView(),
+        settings: data,
+        transitionsBuilder: data.transition ?? _i1.TransitionsBuilders.fadeIn,
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    },
+    _i13.HistoryImageView: (data) {
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i13.HistoryImageView(),
         settings: data,
       );
     },
@@ -195,9 +226,9 @@ class DashboardViewArguments {
     required this.user,
   });
 
-  final _i13.Key? key;
+  final _i14.Key? key;
 
-  final _i14.GoogleSignInAccount user;
+  final _i15.GoogleSignInAccount user;
 
   @override
   String toString() {
@@ -216,7 +247,7 @@ class DashboardViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i15.NavigationService {
+extension NavigatorStateExtension on _i16.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -330,8 +361,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToDashboard({
-    _i13.Key? key,
-    required _i14.GoogleSignInAccount user,
+    _i14.Key? key,
+    required _i15.GoogleSignInAccount user,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -368,6 +399,20 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.dashboardSigninView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToHistory_page([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.history_page,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -487,8 +532,8 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithDashboard({
-    _i13.Key? key,
-    required _i14.GoogleSignInAccount user,
+    _i14.Key? key,
+    required _i15.GoogleSignInAccount user,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -525,6 +570,20 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.dashboardSigninView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithHistory_page([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.history_page,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
